@@ -4,11 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// My routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 
+// Socket io
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+http.listen(4000, function(){
+  console.log('listening on *:3000');
+});
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
