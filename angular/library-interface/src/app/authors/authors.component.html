@@ -1,5 +1,19 @@
-<div *ngFor="let author of authors">
- <p><strong>First name:</strong> {{ author.first_name }}</p> 
- <p><strong>Last name:</strong> {{ author.family_name }}</p> 
- <p><strong>DOB:</strong> {{  author.date_of_birth }}</p> 
+<button (click)="toggleAuthors()">All Authors</button>
+<div *ngIf="authorSwitch">
+  <div *ngFor="let author of authors">
+    <p> 
+      <strong>First name:</strong> {{ author.first_name }}
+    </p>
+    <button (click)="getAuthorId(author._id)">Author Details</button>
+    <div>
+      <p>
+        Full Name: {{ authorDetails.first_name }} {{ authorDetails.family_name }}
+        <br />
+        Date of Birth: {{ authorDetails.date_of_birth }}
+        <br />
+        Hash ID: {{ authorDetails._id }}
+      </p>
+    </div>
+
+  </div>
 </div>

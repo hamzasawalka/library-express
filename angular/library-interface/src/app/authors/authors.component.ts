@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AuthorsService } from '../services/authors.service'
 
 @Component({
@@ -11,15 +10,39 @@ export class AuthorsComponent implements OnInit {
 
   
   public authors;
+  public authorSwitch = 0;
 
+  public authorService;
+
+  public clickedAuthorId;
+  public authorDetails;
   
-  
+  toggleAuthors(){
+      this.authorSwitch == 0 ? this.authorSwitch = 1 : this.authorSwitch = 0;
+  }
+
+  getAuthorId(id) {
+    this.clickedAuthorId = id;
+    this.getAuthorDetails(id);
+  }
+
+  getAuthorDetails(id) {
+    this.authorService.getAuthor(id).subscribe(data => {
+      this.authorDetails = data; console.log(data);
+    }, err => {
+      console.log(err)
+      return err;
+    });
+  }
 
   constructor( author:AuthorsService) {
+    this.authorService = author;
+
+    
    }
 
   ngOnInit() {
-    this.authors.getAuthors().subscribe(data => {
+    this.authorService.getAuthors().subscribe(data => {
       this.authors = data;
     }, err => {
       console.log(err)

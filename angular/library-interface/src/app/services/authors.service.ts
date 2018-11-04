@@ -10,6 +10,10 @@ export class AuthorsService {
    return this.http.get('http://localhost:3000/catalog/authors');
   }
 
+  getAuthor(id) {
+    return this.http.get('http://localhost:3000/catalog/author/' + id);
+  }
+
 
   constructor(private http:  HttpClient) { }
 }
