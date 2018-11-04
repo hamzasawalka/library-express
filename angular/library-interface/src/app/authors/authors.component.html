@@ -5,7 +5,7 @@
       <strong>First name:</strong> {{ author.first_name }}
     </p>
     <button (click)="getAuthorId(author._id)">Author Details</button>
-    <div>
+    <div *ngIf="author._id==clickedAuthorId">
       <p>
         Full Name: {{ authorDetails.first_name }} {{ authorDetails.family_name }}
         <br />
