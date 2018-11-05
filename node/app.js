@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var eventEmitter = require('events')
 
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
 
 // My routes
 var indexRouter = require('./routes/index');
@@ -16,7 +14,7 @@ var catalogRouter = require('./routes/catalog');
 
 
 
-
+var app = express();
 
 //////////////////
 //Set up mongoose connection

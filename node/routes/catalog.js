@@ -6,7 +6,10 @@ var book_controller = require('../controllers/bookController');
 var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
+var Book = require('../models/book');
 
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 
 // Socket io
 var app = express();
@@ -18,13 +21,12 @@ io.on('connection', function(socket){
     console.log('Data: ' + data); 
   });
 });
-
-http.listen(4000, function(){
-  console.log('listening on *:3000');
+http.listen(3002, function(){
+  console.log('listening on *:3001');
 });
 ////////////////
 
-app.post('catalog/book/create', [ 
+router.post('/book/create', [ 
   // Convert the genre to an array.
   (req, res, next) => { console.log(88)
       if(!(req.body.genre instanceof Array)){
@@ -81,7 +83,6 @@ app.post('catalog/book/create', [
                       results.genres[i].checked='true';
                   }
               } 
-              eventEmitter.emit('data', results.book);
               res.render('book_form', { title: 'Create Book',authors:results.authors, genres:results.genres, book: book, errors: errors.array() });
           });
           return;
@@ -93,7 +94,9 @@ app.post('catalog/book/create', [
           book.save(function (err) {
               if (err) { return next(err); }
                  //successful - redirect to new book record.
-                 res.redirect(book.url);
+                 console.log('saveDone', book);
+                io.emit('saveDone', book);
+                res.redirect(book.url);
               });
       }
   }
