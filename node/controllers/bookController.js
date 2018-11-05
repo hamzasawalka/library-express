@@ -148,6 +148,7 @@ exports.book_create_post = [
                         results.genres[i].checked='true';
                     }
                 }
+                
                 res.render('book_form', { title: 'Create Book',authors:results.authors, genres:results.genres, book: book, errors: errors.array() });
             });
             return;
