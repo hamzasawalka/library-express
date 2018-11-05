@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var eventEmitter = require('events')
 
-var app = express();
 
 // My routes
 var indexRouter = require('./routes/index');
@@ -15,7 +14,7 @@ var catalogRouter = require('./routes/catalog');
 
 
 
-
+var app = express();
 
 //////////////////
 //Set up mongoose connection
@@ -63,6 +62,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
- app.listen(3000)
+ app.listen(4002)
 
 module.exports = app;

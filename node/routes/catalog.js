@@ -8,27 +8,34 @@ var book_controller = require('../controllers/bookController');
 var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
+var Book = require('../models/book');
+
 
 
 // Socket io
 var app = express();
 var http = require('http').Server(app);
+http.listen(5000);
 var io = require('socket.io')(http);
+
 io.on('connection', function(socket){
-    console.log('connected');
+    console.log('io connected');
   socket.on('data', function(data){
     console.log('Data: ' + data); 
   });
+  socket.on('saveDone', function(data){
+    console.log(data);
+})
 });
 
-http.listen(4000, function(){
-  console.log('listening on *:3000');
-});
-////////////////
 
-app.post('catalog/book/create', [ 
+
+
+////////////
+
+router.post('/book/create', [ 
   // Convert the genre to an array.
-  (req, res, next) => { console.log(88)
+  (req, res, next) => { 
       if(!(req.body.genre instanceof Array)){
           if(typeof req.body.genre==='undefined')
           req.body.genre=[];
@@ -83,19 +90,17 @@ app.post('catalog/book/create', [
                       results.genres[i].checked='true';
                   }
               } 
-              eventEmitter.emit('data', results.book);
               res.render('book_form', { title: 'Create Book',authors:results.authors, genres:results.genres, book: book, errors: errors.array() });
           });
           return;
       }
       else {
-        console.log(88999)
-
           // Data from form is valid. Save book.
           book.save(function (err) {
               if (err) { return next(err); }
                  //successful - redirect to new book record.
-                 res.redirect(book.url);
+                io.emit('saveDone', 'hello');
+                res.redirect(book.url);
               });
       }
   }

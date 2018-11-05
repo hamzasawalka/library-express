@@ -37,6 +37,14 @@ export class AuthorsComponent implements OnInit {
 
   constructor(author: AuthorsService) {
     this.authorService = author;
+    this.authorDetails ={
+                      "_id": "",
+                      "first_name": "",
+                      "family_name": "",
+                      "date_of_birth": "",
+                      "date_of_death": "",
+                      "__v": 0
+                      };
 
     this.authorDetails = {
       "_id": "",
