@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var eventEmitter = require('events')
 
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
+var app = express();
 
 // My routes
 var indexRouter = require('./routes/index');
