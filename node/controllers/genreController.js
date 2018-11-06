@@ -2,7 +2,6 @@ var Genre = require('../models/genre');
 var Book = require('../models/book');
 var BookInstance = require('../models/bookinstance');
 var async = require('async');
-var mongoose = require('mongoose');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 

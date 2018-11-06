@@ -39,6 +39,14 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter)
 
+app.get('/promises', function(req, res){
+  res.render('promise', {});
+});
+
+app.get('/getAge', function( req, res) {
+  res.send('Enter your height');
+});
+
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -62,6 +70,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
- app.listen(4002)
+app.listen(4000)
 
 module.exports = app;

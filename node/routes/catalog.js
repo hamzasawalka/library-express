@@ -13,25 +13,34 @@ var Book = require('../models/book');
 
 
 // Socket io
-var app = express();
-var http = require('http').Server(app);
-http.listen(5000);
-var io = require('socket.io')(http);
+// var app = express();
+// app.use((req, res, next) => {
+//     res.append('Access-Control-Allow-Origin', ['*']);
+//     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.append('Access-Control-Allow-Headers', 'Content-Type');
+//     next();
+//   });
 
-io.on('connection', function(socket){
-    console.log('io connected');
-  socket.on('data', function(data){
-    console.log('Data: ' + data); 
-  });
-  socket.on('saveDone', function(data){
-    console.log(data);
-})
-});
+// var http = require('http').Server(app);
+// http.listen(5000);
+// var io = require('socket.io')(http);
+
+// io.on('connection', function(socket){
+//     console.log('io connected');
+//   socket.on('data', function(data){
+//     console.log('Data: ' + data); 
+//   });
+//   socket.on('saveDone', function(data){
+//     console.log(data);
+//     })
+// });
 
 
 
 
 ////////////
+
+
 
 router.post('/book/create', [ 
   // Convert the genre to an array.
@@ -99,12 +108,18 @@ router.post('/book/create', [
           book.save(function (err) {
               if (err) { return next(err); }
                  //successful - redirect to new book record.
-                io.emit('saveDone', 'hello');
+                // io.emit('saveDone', 'hello');
                 res.redirect(book.url);
               });
       }
   }
 ]);
+
+// test ///////////
+
+
+
+//////////////////
 
 
 /// BOOK ROUTES ///
