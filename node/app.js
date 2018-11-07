@@ -44,7 +44,9 @@ app.get('/promises', function(req, res){
 });
 
 app.get('/getAge', function( req, res) {
-  res.send('Enter your height');
+  console.log('reached')
+  res.render('error', {});
+  
 });
 
 app.use((req, res, next) => {

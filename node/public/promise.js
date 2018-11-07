@@ -12,10 +12,7 @@ function send2() {
             if (this.readyState == 4 && this.status == 200) {
                 // Typical action to be performed when the document is ready:
                 resolve(a);
-                //console.log(resolve,xhttp.responseText);
-            }else{
                 
-                reject([this.readyState,this.status])
             }
         };
         xhttp.open("get", "/getAge");
